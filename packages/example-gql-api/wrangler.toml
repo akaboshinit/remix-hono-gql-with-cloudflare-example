@@ -1,0 +1,19 @@
+name = "example-gql-api-dev"
+main = "worker/index.ts"
+
+minify = true
+workers_dev = false
+
+compatibility_date = "2022-10-21"
+
+vars = { SESSION_SECRET = "defaultshould-be-secure-in-SESSION_SECRET" }
+
+[dev]
+port = 8081
+
+
+[env.stg]
+name = "example-gql-api-stg"
+
+[env.prd]
+name = "example-gql-api"

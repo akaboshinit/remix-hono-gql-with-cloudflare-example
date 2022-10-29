@@ -1,0 +1,27 @@
+# npx cross-env NODE_ENV=development wrangler dev --local -c wrangler.ssr.toml
+name = "example-remix-dev-ssr"
+# main = "worker/index.ts"
+main = "./build/ssr/index.js"
+port = 8081
+
+minify = true
+workers_dev = false
+
+compatibility_date = "2022-10-21"
+
+[site]
+bucket = "./public"
+
+[build]
+command = "SSR=true npm run build"
+
+[dev]
+port = 8083
+
+
+
+[env.stg]
+name = "example-remix-stg-ssr"
+
+[env.prd]
+name = "example-remix-ssr"

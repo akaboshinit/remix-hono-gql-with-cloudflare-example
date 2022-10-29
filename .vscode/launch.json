@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "dev:all",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "npm run dev:all",
+            "console": "integratedTerminal",
+            "serverReadyAction": {
+                "pattern": "Starting a local server...",
+                "uriFormat": "http://localhost:8080",
+                "action": "debugWithChrome"
+                // "action": "openExternally"
+            },
+        },
+    ]
+}

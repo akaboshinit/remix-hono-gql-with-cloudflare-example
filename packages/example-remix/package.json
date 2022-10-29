@@ -1,0 +1,40 @@
+{
+    "private": true,
+    "sideEffects": false,
+    "scripts": {
+        "clean": "rm package-lock.json && rm -rf node_modules/ ",
+        "postinstall": "remix-esbuild-override",
+        "build": "remix build",
+        "dev:wrangler:remix": "cross-env NODE_ENV=development wrangler dev --local -c wrangler.remix.toml",
+        "dev:wrangler:ssr": "WORKER_SPREAD=true cross-env NODE_ENV=development wrangler dev --local -c wrangler.ssr.toml",
+        "dev:remix:watch": "remix watch",
+        "dev": "npm run build && concurrently \"npm run dev:wrangler:remix\" \"npm run dev:remix:watch\"",
+        "dev:spread": "WORKER_SPREAD=true npm run build && concurrently \"WORKER_SPREAD=true npm run dev:wrangler:remix\" \"npm run dev:wrangler:ssr\" \"WORKER_SPREAD=true npm run dev:remix:watch\"",
+        "dev-stg": "npm run build && wrangler dev --env stg --local",
+        "start": "cross-env NODE_ENV=production wrangler dev --env prd --local ./build/remix/index.js",
+        "deploy": "wrangler publish --env prd"
+    },
+    "dependencies": {
+        "@cloudflare/kv-asset-handler": "^0.2.0",
+        "@remix-run/cloudflare": "^1.7.2",
+        "@remix-run/cloudflare-workers": "^1.7.2",
+        "@remix-run/react": "^1.7.2",
+        "cross-env": "^7.0.3",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
+    },
+    "devDependencies": {
+        "@remix-run/dev": "^1.7.2",
+        "@remix-run/eslint-config": "^1.7.2",
+        "@types/react": "^17.0.47",
+        "@types/react-dom": "^17.0.17",
+        "concurrently": "^7.4.0",
+        "eslint": "^8.23.1",
+        "remix-esbuild-override": "^3.0.4",
+        "remix-service-bindings": "^1.1.1",
+        "remix-service-bindings-fork": "file:../../npm-packages/remix-service-bindings"
+    },
+    "engines": {
+        "node": ">=16.13"
+    }
+}

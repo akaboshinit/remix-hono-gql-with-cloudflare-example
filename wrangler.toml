@@ -1,0 +1,33 @@
+name = "remix-hono-with-cloudflare-example-dev"
+main = "worker/index.ts"
+
+minify = true
+workers_dev = true
+
+compatibility_date = "2022-10-21"
+
+services = [
+    { binding = "REMIX", service = "example-remix-dev" },
+    { binding = "HONO_API", service = "example-hono-api-dev" },
+]
+vars = { SESSION_SECRET = "should-be-secure-in-SESSION_SECRET" }
+
+[dev]
+port = 8080
+
+
+[env.stg]
+name = "remix-hono-with-cloudflare-example-stg"
+services = [
+    { binding = "REMIX", service = "example-remix-stg" },
+    { binding = "HONO_API", service = "example-hono-api-stg" },
+]
+vars = { SESSION_SECRET = "should-be-secure-in-SESSION_SECRET" }
+
+[env.prd]
+name = "remix-hono-with-cloudflare-example"
+services = [
+    { binding = "REMIX", service = "example-remix" },
+    { binding = "HONO_API", service = "example-hono-api" },
+]
+vars = { SESSION_SECRET = "should-be-secure-in-SESSION_SECRET" }

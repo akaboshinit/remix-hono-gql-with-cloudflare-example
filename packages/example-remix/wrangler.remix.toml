@@ -1,0 +1,37 @@
+# npx cross-env NODE_ENV=development wrangler dev --local -c wrangler.remix.toml
+name = "example-remix-dev"
+# main = "worker/remix.ts"
+main = "./build/remix/index.js"
+
+minify = true
+workers_dev = true
+
+compatibility_date = "2022-10-21"
+
+services = [
+    { binding = "REMIX_SSR", service = "example-remix-dev-ssr" },
+]
+vars = { SESSION_SECRET = "should-be-secure-in-SESSION_SECRET" }
+
+[site]
+bucket = "./public"
+
+[build]
+command = "npm run build"
+
+[dev]
+port = 8082
+
+
+
+[env.stg]
+name = "example-remix-stg"
+services = [
+    { binding = "REMIX_SSR", service = "example-remix-stg-ssr" },
+]
+
+[env.prd]
+name = "example-remix"
+services = [
+    { binding = "REMIX_SSR", service = "example-remix-ssr" },
+]

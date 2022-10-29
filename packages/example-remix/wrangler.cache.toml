@@ -1,0 +1,33 @@
+# npx cross-env NODE_ENV=development wrangler dev --local -c wrangler.cache.toml
+
+name = "example-remix-cache-dev"
+main = "worker/cache.ts"
+
+minify = true
+workers_dev = false
+
+compatibility_date = "2022-10-21"
+
+services = [
+    { binding = "REMIX", service = "example-remix-dev" },
+]
+
+[site]
+bucket = "./public"
+
+[build]
+command = "npm run build"
+
+
+[env.stg]
+name = "example-remix-cache-stg"
+services = [
+    { binding = "REMIX", service = "example-remix-stg" },
+]
+
+[env.prd]
+name = "example-cache-remix"
+services = [
+    { binding = "REMIX", service = "example-remix" },
+]
+
