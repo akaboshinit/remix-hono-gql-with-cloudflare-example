@@ -12,7 +12,8 @@
         "dev:spread": "WORKER_SPREAD=true npm run build && concurrently \"WORKER_SPREAD=true npm run dev:wrangler:remix\" \"npm run dev:wrangler:ssr\" \"WORKER_SPREAD=true npm run dev:remix:watch\"",
         "dev-stg": "npm run build && wrangler dev --env stg --local",
         "start": "cross-env NODE_ENV=production wrangler dev --env prd --local ./build/remix/index.js",
-        "deploy": "wrangler publish --env prd"
+        "deploy": "wrangler publish --env prd -c wrangler.remix.toml",
+        "deploy:spread": "WORKER_SPREAD=true wrangler publish --env prd -c wrangler.remix.toml && wrangler publish --env prd -c wrangler.ssr.toml"
     },
     "dependencies": {
         "@cloudflare/kv-asset-handler": "^0.2.0",
